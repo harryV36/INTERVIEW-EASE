@@ -1,0 +1,32 @@
+# AI Interview Backend — Python dependencies
+# Install: pip install -r requirements.txt
+
+# Core framework
+Flask==3.0.3
+Flask-CORS==4.0.1
+Flask-SocketIO==5.3.6
+python-socketio==5.11.1
+python-engineio==4.9.1
+werkzeug==3.0.3
+
+# OpenAI
+openai>=1.30.0
+
+# Resume parsing
+pdfplumber>=0.11.0
+python-docx==1.1.2
+Pillow>=10.3.0
+
+# Environment
+python-dotenv==1.0.1
+
+# HTTP
+requests==2.32.3
+
+# Optional: video / face detection (comment out if not needed)
+# opencv-python==4.9.0.80
+# numpy==1.26.4
+# face-recognition==1.3.5
+
+# Production
+gunicorn==22.0.0

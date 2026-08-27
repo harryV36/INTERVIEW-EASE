@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Interview Generator</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        textarea, input[type="text"] { width: 100%; margin-top: 10px; }
+        button { margin-top: 10px; padding: 10px; }
+        .question-box { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Upload Resume to Generate Interview Questions</h1>
+    <input type="file" id="resume">
+    <button onclick="upload()">Upload & Generate Questions</button>
+
+    <div id="questions-container"></div>
+
+    <script>
+        let generatedQuestions = [];
+
+        async function upload() {
+            const fileInput = document.getElementById('resume');
+            const formData = new FormData();
+            formData.append('resume', fileInput.files[0]);
+
+            const res = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await res.json();
+            const questionsText = data.questions;
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '<h2>Generated Questions</h2>';
+
+            generatedQuestions = questionsText.split(/\d+\.\s+/).filter(q => q.trim() !== "");
+            generatedQuestions.forEach((q, index) => {
+                container.innerHTML += 
+                    <div class="question-box">
+                        <strong>Q${index + 1}: ${q.trim()}</strong><br>
+                        <textarea id="answer-${index}" rows="3" placeholder="Type or speak your answer..."></textarea><br>
+                        <button onclick="startListening(${index})">Speak</button>
+                    </div>
+                ;
+            });
+        }
+
+        function startListening(index) {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                const textarea = document.getElementById(answer-${index});
+                textarea.value += " " + transcript;
+            };
+
+            recognition.onerror = function(event) {
+                alert("Speech recognition error: " + event.error);
+            };
+        }
+    </script>
+</body>
+</html>
