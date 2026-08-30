@@ -226,7 +226,7 @@ The landing page introduces the Interview Ease platform and its AI-assisted inte
 
 The dashboard summarizes interview performance, technical and communication scores, interview history, and improvement suggestions.
 
-![Interview Ease Dashboard](docs/screenshots/dashboard.png)
+![Interview Ease Dashboard](docs/screenshots/Student%20Dashboard.png)
 
 ---
 
